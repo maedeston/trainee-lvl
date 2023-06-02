@@ -1,19 +1,19 @@
 from pydantic import BaseModel, EmailStr, conint
 from datetime import datetime
-import app.models
+from typing import Optional
 
-class Transaction(BaseModel):
-    AFrom: int
-    Ato: int
-    count: int
 
-class User(BaseModel):
-    user_id: int
+
+class UserBase(BaseModel):
+    id: int
+    email: EmailStr
+    password: str
+
+class UserOut(BaseModel):
     email: str
-    password: int
 
-class Bank_Client(BaseModel):
-    bank_client_id: int
-    tax_id: int
+    class Config:
+        orm_mode = True
 
-
+class UserCreate(UserBase):
+    pass
